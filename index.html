@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GO Agnus | Grupo de Oração Jovem</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Fundo de Partículas / Fogo do Espírito Santo -->
+    <canvas id="holyCanvas"></canvas>
+
+    <main class="main-wrapper">
+        <div class="container">
+            <!-- Cabeçalho -->
+            <header class="profile">
+                <div class="avatar-container">
+                    <img class="avatar" src="iconagnus.png" alt="Logótipo GO Agnus">
+                </div>
+                <div class="profile-info">
+                    <h1>GO Agnus</h1>
+                    <p class="subtitle">Grupo de Oração Jovem • Diocese de São José dos Campos</p>
+                    <span class="badge-rcc"><i class="fa-solid fa-fire"></i> Renovação Carismática Católica</span>
+                </div>
+            </header>
+
+            <div class="content-grid">
+                
+                <!-- Coluna Esquerda: Carrossel + Versículo -->
+                <section class="grid-column">
+                    <div class="carousel-wrapper" id="carouselWrapper">
+                        <div class="carousel-progress" id="carouselProgress"></div>
+                        <div class="carousel-track" id="carouselTrack">
+                            <div class="slide">
+                                <img src="image3.jpg" alt="Momento de Oração">
+                                <div class="slide-caption">Louvor, oração e efusão do Espírito Santo</div>
+                            </div>
+                            <div class="slide">
+                                <img src="image2.jpg" alt="Juventude Reunida">
+                                <div class="slide-caption">Vem viver esta experiência com a gente!</div>
+                            </div>
+                            <div class="slide">
+                                <img src="Image.jpg" alt="Dinâmicas e Fraternidade">
+                                <div class="slide-caption">Juventude, partilha e vida em comunidade</div>
+                            </div>
+                        </div>
+
+                        <button class="carousel-btn prev" id="prevBtn" aria-label="Foto anterior">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn next" id="nextBtn" aria-label="Próxima foto">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <div class="carousel-dots" id="carouselDots"></div>
+                    </div>
+
+                    <!-- Card Versículo Bíblico Interativo -->
+                    <div class="card verse-card">
+                        <div class="verse-header">
+                            <i class="fa-solid fa-book-bible"></i>
+                            <span>Palavra do Dia</span>
+                            <button id="nextVerseBtn" title="Outro Versículo"><i class="fa-solid fa-arrows-rotate"></i></button>
+                        </div>
+                        <blockquote id="verseText">"Não fostes vós que me escolhestes, mas eu vos escolhi a vós."</blockquote>
+                        <cite id="verseRef">— João 15, 16</cite>
+                    </div>
+                </section>
+
+                <!-- Coluna Direita: Local, Vela e Links -->
+                <section class="grid-column actions-column">
+                    
+                    <!-- Card Local + Contador -->
+                    <div class="card location-card">
+                        <div class="card-header">
+                            <span class="tag-badge"><i class="fa-solid fa-location-dot"></i> Novo Local</span>
+                        </div>
+                        <h2>Capela Santa Terezinha</h2>
+                        
+                        <div class="meeting-time">
+                            <i class="fa-regular fa-clock"></i>
+                            <span><strong>Todo Sábado</strong> às <strong>18h00</strong></span>
+                        </div>
+
+                        <div class="countdown-box" id="countdownBox">
+                            <i class="fa-solid fa-hourglass-half"></i>
+                            <span id="countdownText">Calculando próximo encontro...</span>
+                        </div>
+
+                        <p class="location-desc">
+                            O nosso ponto de encontro oficial agora é na Capela Santa Terezinha. Venha viver momentos inesquecíveis de fé e comunhão!
+                        </p>
+
+                        <a href="https://maps.google.com/?q=Capela+Santa+Terezinha+Sao+Jose+dos+Campos" target="_blank" class="btn-primary" rel="noopener noreferrer">
+                            <i class="fa-solid fa-diamond-turn-right"></i> Ver rota no Google Maps
+                        </a>
+                    </div>
+
+                    <!-- Card Vela Virtual de Oração -->
+                    <div class="card candle-card" id="candleCard">
+                        <div class="candle-icon-container">
+                            <i class="fa-solid fa-fire candle-flame" id="candleFlame"></i>
+                            <i class="fa-solid fa-monument candle-base"></i>
+                        </div>
+                        <div class="candle-info">
+                            <span class="candle-title">Vela Virtual de Intenção</span>
+                            <small id="candleMsg">Toque para acender uma vela por uma intenção</small>
+                        </div>
+                        <button class="btn-candle" id="lightCandleBtn">
+                            <i class="fa-solid fa-fire-burner"></i> Acender
+                        </button>
+                    </div>
+
+                    <!-- Links Rápidos -->
+                    <div class="links-container">
+                        <a href="#" target="_blank" class="card link-card" rel="noopener noreferrer">
+                            <div class="link-info">
+                                <i class="fa-solid fa-calendar-days link-icon"></i>
+                                <div class="link-text">
+                                    <span>Próximos Retiros & Eventos</span>
+                                    <small>Inscrições abertas e avisos</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square arrow-icon"></i>
+                        </a>
+
+                        <a href="#" target="_blank" class="card link-card" rel="noopener noreferrer">
+                            <div class="link-info">
+                                <i class="fa-solid fa-hands-praying link-icon"></i>
+                                <div class="link-text">
+                                    <span>Pedidos de Oração</span>
+                                    <small>Envie sua intenção de oração</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square arrow-icon"></i>
+                        </a>
+
+                        <a href="#" target="_blank" class="card link-card" rel="noopener noreferrer">
+                            <div class="link-info">
+                                <i class="fa-solid fa-music link-icon"></i>
+                                <div class="link-text">
+                                    <span>Músicas & Louvores</span>
+                                    <small>Playlists do GO Agnus</small>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-arrow-up-right-from-square arrow-icon"></i>
+                        </a>
+                    </div>
+
+                </section>
+
+            </div>
+
+            <footer>
+                <p>Diocese de São José dos Campos • RCC</p>
+                <p class="slogan">"Um coração aberto ao Espírito Santo"</p>
+            </footer>
+        </div>
+    </main>
+
+    <!-- Ficheiro JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,523 @@
+:root {
+    --primary: #d97706;
+    --primary-hover: #b45309;
+    --accent: #f59e0b;
+    --bg-dark: #070d18;
+    --card-bg: #141f33;
+    --card-hover: #1c2b45;
+    --text-light: #f8fafc;
+    --text-muted: #94a3b8;
+    --radius-lg: 20px;
+    --radius-md: 14px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Canvas de Fundo */
+#holyCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.main-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+/* --- Perfil --- */
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+}
+
+.avatar-container {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 3px solid var(--accent);
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.profile h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.badge-rcc {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: rgba(217, 119, 6, 0.15);
+    color: var(--accent);
+    border: 1px solid rgba(217, 119, 6, 0.4);
+    border-radius: 20px;
+    padding: 0.35rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* --- Grelha Principal --- */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.grid-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+/* --- Carrossel --- */
+.carousel-wrapper {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background-color: var(--card-bg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    user-select: none;
+}
+
+.carousel-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), #ef4444);
+    width: 0%;
+    z-index: 10;
+    transition: width 4.5s linear;
+}
+
+.carousel-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+.slide {
+    min-width: 100%;
+    max-width: 100%;
+    flex-shrink: 0;
+    height: 100%;
+    position: relative;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+    pointer-events: none;
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem 1rem 2rem 1rem;
+    background: linear-gradient(transparent, rgba(7, 13, 24, 0.95) 75%);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #ffffff;
+    text-align: center;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(7, 13, 24, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 1.1rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    z-index: 5;
+}
+
+.carousel-btn:hover {
+    background: var(--primary);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev { left: 12px; }
+.next { right: 12px; }
+
+.carousel-dots {
+    position: absolute;
+    bottom: 12px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    z-index: 5;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: var(--accent);
+    width: 24px;
+    border-radius: 8px;
+}
+
+/* --- Cards --- */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+/* Versículo */
+.verse-card {
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    background: linear-gradient(145deg, #16243d, #0f192b);
+    border-left: 3px solid var(--accent);
+}
+
+.verse-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.verse-header button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.verse-header button:hover {
+    color: var(--text-light);
+    transform: rotate(180deg);
+}
+
+#verseText {
+    font-size: 0.92rem;
+    font-style: italic;
+    color: #e2e8f0;
+    line-height: 1.45;
+}
+
+#verseRef {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: right;
+    display: block;
+}
+
+/* Local */
+.location-card {
+    background: linear-gradient(145deg, #17243c, #0e1726);
+    border: 1px solid rgba(217, 119, 6, 0.35);
+    padding: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.tag-badge {
+    background-color: var(--primary);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.25rem 0.7rem;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.location-card h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.meeting-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.5rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    border-left: 3px solid var(--accent);
+}
+
+.countdown-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    color: var(--accent);
+    background: rgba(245, 158, 11, 0.1);
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.location-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background-color: rgba(217, 119, 6, 0.15);
+    color: var(--accent);
+    border: 1px solid var(--primary);
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+/* Vela Virtual */
+.candle-card {
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: rgba(20, 31, 51, 0.7);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.candle-icon-container {
+    position: relative;
+    width: 32px;
+    text-align: center;
+}
+
+.candle-flame {
+    font-size: 1.2rem;
+    color: #64748b;
+    transition: color 0.4s, filter 0.4s, transform 0.4s;
+}
+
+.candle-flame.lit {
+    color: #f59e0b;
+    filter: drop-shadow(0 0 10px #f59e0b);
+    animation: flameFlicker 1.5s infinite alternate;
+}
+
+@keyframes flameFlicker {
+    0% { transform: scale(1); opacity: 0.9; }
+    100% { transform: scale(1.18); opacity: 1; }
+}
+
+.candle-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.candle-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.candle-info small {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+.btn-candle {
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 0.45rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-candle:hover {
+    background: var(--accent);
+    color: #000;
+}
+
+/* Links Rápidos */
+.links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.link-card {
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--text-light);
+    text-decoration: none;
+}
+
+.link-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+    background-color: var(--card-hover);
+}
+
+.link-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.link-icon {
+    font-size: 1.3rem;
+    color: var(--accent);
+    width: 24px;
+    text-align: center;
+}
+
+.link-text span {
+    display: block;
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+.link-text small {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+.arrow-icon {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+}
+
+.slogan {
+    margin-top: 4px;
+    opacity: 0.65;
+    font-style: italic;
+}
+
+/* Telas Maiores */
+@media (min-width: 768px) {
+    .profile {
+        flex-direction: row;
+        text-align: left;
+        gap: 1.8rem;
+        background: rgba(20, 31, 51, 0.4);
+        padding: 1.5rem 2rem;
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.8rem;
+    }
+
+    .carousel-wrapper {
+        min-height: 380px;
+    }
+}
